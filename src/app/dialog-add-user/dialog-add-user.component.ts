@@ -16,7 +16,6 @@ import { MyServiceService } from '../firestore.service';
   selector: 'app-dialog-add-user',
   standalone: true,
   imports: [CommonModule, MatProgressBarModule, MatButtonModule, MatDialogModule, FormsModule, MatInputModule, MatFormFieldModule, MatDatepickerModule, MatNativeDateModule, MatMomentDateModule],
-  providers: [MatDatepickerModule, MatNativeDateModule, MatNativeDateModule, MyServiceService],
   templateUrl: './dialog-add-user.component.html',
   styleUrl: './dialog-add-user.component.scss'
 })
