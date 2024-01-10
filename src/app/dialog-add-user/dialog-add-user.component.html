@@ -16,7 +16,7 @@
     <div>
         <mat-form-field appearance="outline" class="full-width">
             <mat-label>Birth Date</mat-label>
-            <input [(ngModel)]="birthDate" matInput placeholder="2/4/1990" [matDatepicker]="datepicker">
+            <input [(ngModel)]="birthDate" type="datetime" matInput placeholder="2/4/1990" [matDatepicker]="datepicker">
             <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
             <mat-datepicker #datepicker></mat-datepicker>
         </mat-form-field>
@@ -45,3 +45,4 @@
         <button mat-button>Cancel</button>
         <button mat-button (click)="saveUser()" cdkFocusInitial>Save</button>
     </div>
+</div>
