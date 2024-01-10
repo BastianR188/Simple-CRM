@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatMomentDateModule } from "@angular/material-moment-adapter";
@@ -25,7 +25,7 @@ export class DialogAddUserComponent {
   birthDate!: Date;
   firestore: Firestore = inject(Firestore);
   loading = false;
-  constructor() {
+  constructor(public dialogRef: MatDialogRef<DialogAddUserComponent>) {
   }
 
   saveUser() {
@@ -43,6 +43,7 @@ export class DialogAddUserComponent {
       .then((result: any) => {
         console.log('Added user in Firestore', result);
         this.loading = false;
+        this.dialogRef.close();
       })
       .catch((error: any) => {
         console.error('Error to add user in Firestore', error);

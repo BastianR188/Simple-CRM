@@ -3,3 +3,11 @@
     right: 56px;
     bottom: 56px;
 }
+
+.user-table {
+    padding: 16px;
+    th{
+        color: rgba($color: #000000, $alpha: 0.35);
+        text-align: start;
+    }
+}
