@@ -1,53 +1,63 @@
-.mat-drawer-container{
+.mat-drawer-container {
     height: 100vh;
 }
 
-.menu-icon{
+.menu-icon {
     cursor: pointer;
 }
 
-.sidenav{
+.sidenav {
     width: 300px;
 
 }
 
-.logo-container{
+.logo-container {
     border-bottom: 1px solid rgba($color: #000000, $alpha: 0.04);
     padding: 0 16px;
     min-height: 56px;
     display: flex;
     align-items: center;
+
+    img {
+        height: 40px;
+        margin: auto;
+    }
 }
 
-mat-toolbar, mat-toolbar-row {
+mat-toolbar,
+mat-toolbar-row {
     min-height: 56px;
     height: 56px;
 }
 
-.menu-items{
+.menu-items {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    li{
+
+    li {
         padding: 0 16px;
         height: 48px;
         display: flex;
         align-items: center;
         cursor: pointer;
 
-        mat-icon{
+        mat-icon {
             margin-right: 16px;
         }
 
         &:hover {
             background-color: rgba($color: #000000, $alpha: 0.04);
         }
-        &:focus{
+
+        &:focus {
             outline: none;
         }
     }
 }
 
-.router-container{
+.router-container {
     padding: 16px 56px 0 56px;
+
+
 }
