@@ -7,11 +7,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogAddUserComponent } from '../dialog-add-user/dialog-add-user.component';
 import { User } from '../../models/user.class';
 import { MatCardModule } from '@angular/material/card';
+import { CommonModule } from '@angular/common';
+import { MyServiceService } from '../firestore.service';
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [MatCardModule, MatIconModule, MatButtonModule, MatTooltipModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, MatCardModule, MatIconModule, MatButtonModule, MatTooltipModule, FormsModule, ReactiveFormsModule],
+  providers: [MyServiceService],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss'
 })
@@ -20,8 +23,12 @@ export class UserComponent {
   user = new User();
 
 
-  constructor(public dialog: MatDialog) {
+  constructor(private service: MyServiceService, public dialog: MatDialog) {
+    this.service.load();
+  }
 
+  getAllUsers() {
+    return this.service.allDataUsers
   }
 
   openDialog() {

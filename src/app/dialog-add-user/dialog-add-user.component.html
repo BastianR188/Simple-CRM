@@ -36,7 +36,8 @@
     <div>
         <mat-form-field class="mr-16" appearance="outline">
             <mat-label>Zip Code</mat-label>
-            <input [disabled]="loading" [(ngModel)]="user.zipCode" type="number" matInput placeholder="Placeholder">
+            <input [disabled]="loading" pattern="[0-9]*" [(ngModel)]="user.zipCode" type="text" matInput
+                placeholder="Placeholder">
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>City</mat-label>

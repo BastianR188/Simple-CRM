@@ -3,24 +3,15 @@
     <tr>
       <th>Name</th>
       <th>E-Mail</th>
-      <th>Birth Date</th>
       <th>City</th>
     </tr>
-    <tr>
-      <td>name</td>
-      <td>mail</td>
-      <td>birth</td>
-      <td>stadt</td>
-    </tr>
-    <tr>
-      <td>name</td>
-      <td>mail</td>
-      <td>birth</td>
-      <td>stadt</td>
+    <tr *ngFor="let user of getAllUsers()">
+      <td>{{user.firstName}} {{user.lastName}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.city}}</td>
     </tr>
   </table>
 </mat-card>
-
 <button (click)="openDialog()" class="add-user-btn" mat-fab color="primary" matTooltip="Add user"
   [matTooltipPosition]="'above'">
   <mat-icon>add</mat-icon>
