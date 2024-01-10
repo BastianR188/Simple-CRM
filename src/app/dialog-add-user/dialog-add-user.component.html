@@ -1,22 +1,25 @@
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
 <h1 mat-dialog-title>Add User</h1>
 <div mat-dialog-content>
 
     <div>
         <mat-form-field class="mr-16" appearance="outline">
             <mat-label>First Name</mat-label>
-            <input [(ngModel)]="user.firstName" matInput placeholder="Placeholder">
+            <input [disabled]="loading" [(ngModel)]="user.firstName" matInput placeholder="Placeholder">
         </mat-form-field>
 
         <mat-form-field appearance="outline">
             <mat-label>Last Name</mat-label>
-            <input [(ngModel)]="user.lastName" matInput placeholder="Placeholder">
+            <input [disabled]="loading" [(ngModel)]="user.lastName" matInput placeholder="Placeholder">
         </mat-form-field>
     </div>
 
     <div>
         <mat-form-field appearance="outline" class="full-width">
             <mat-label>Birth Date</mat-label>
-            <input [(ngModel)]="birthDate" type="datetime" matInput placeholder="2/4/1990" [matDatepicker]="datepicker">
+            <input [disabled]="loading" [(ngModel)]="birthDate" type="datetime" matInput placeholder="2/4/1990"
+                [matDatepicker]="datepicker">
             <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
             <mat-datepicker #datepicker></mat-datepicker>
         </mat-form-field>
@@ -26,23 +29,23 @@
     <div>
         <mat-form-field appearance="outline" class="full-width">
             <mat-label>Street + House no.</mat-label>
-            <input [(ngModel)]="user.street" matInput placeholder="Placeholder">
+            <input [disabled]="loading" [(ngModel)]="user.street" matInput placeholder="Placeholder">
         </mat-form-field>
     </div>
 
     <div>
         <mat-form-field class="mr-16" appearance="outline">
             <mat-label>Zip Code</mat-label>
-            <input [(ngModel)]="user.zipCode" type="number" matInput placeholder="Placeholder">
+            <input [disabled]="loading" [(ngModel)]="user.zipCode" type="number" matInput placeholder="Placeholder">
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>City</mat-label>
-            <input [(ngModel)]="user.city" matInput placeholder="Placeholder">
+            <input [disabled]="loading" [(ngModel)]="user.city" matInput placeholder="Placeholder">
         </mat-form-field>
     </div>
 
     <div mat-dialog-actions>
-        <button mat-button>Cancel</button>
-        <button mat-button (click)="saveUser()" cdkFocusInitial>Save</button>
+        <button [disabled]="loading" mat-button>Cancel</button>
+        <button [disabled]="loading" mat-button (click)="saveUser()" cdkFocusInitial>Save</button>
     </div>
 </div>
