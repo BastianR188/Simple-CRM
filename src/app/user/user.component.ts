@@ -8,6 +8,7 @@ import { DialogAddUserComponent } from '../dialog-add-user/dialog-add-user.compo
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { MyServiceService } from '../firestore.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user',
@@ -18,7 +19,7 @@ import { MyServiceService } from '../firestore.service';
 })
 export class UserComponent {
 
-  constructor(private service: MyServiceService, public dialog: MatDialog) {
+  constructor(private service: MyServiceService, public dialog: MatDialog, private router: Router) {
     this.service.load();
   }
 
@@ -28,5 +29,9 @@ export class UserComponent {
 
   openDialog() {
     this.dialog.open(DialogAddUserComponent)
+  }
+
+  goToUser(userId: string) {
+    this.router.navigate(['/user', userId]);
   }
 }
