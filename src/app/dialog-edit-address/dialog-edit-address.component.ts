@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MyServiceService } from '../firestore.service';
 
 @Component({
   selector: 'app-dialog-edit-address',
@@ -19,11 +20,17 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
   styleUrl: './dialog-edit-address.component.scss'
 })
 export class DialogEditAddressComponent {
-  user: User = new User()
+  user: User = new User();
+  userId: string | undefined;
   loading = false;
-  constructor(public dialogRef: MatDialogRef<DialogEditAddressComponent>) {
+  constructor(private service: MyServiceService, public dialogRef: MatDialogRef<DialogEditAddressComponent>) {
+
   }
   saveUser() {
-
+    this.loading = true;
+    if (this.userId)
+      this.service.update(this.userId, this.user);
+    this.loading = false;
+    this.dialogRef.close(this.user)
   }
 }

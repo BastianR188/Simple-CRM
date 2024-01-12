@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { User } from '../models/user.class';
-import { Firestore, addDoc, collection, doc, getDoc, onSnapshot } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, deleteDoc, doc, getDoc, onSnapshot, setDoc } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,16 @@ export class MyServiceService {
     return addDoc(collection(this.firestore, 'users'), user.toJSON())
   }
 
+  async update(id: string, user: User) {
+    await setDoc(doc(collection(this.firestore, 'users'), id), user.toJSON());
+    const index = this.allDataUsers.findIndex(obj => obj.id === id);
+    if (index !== -1) this.allDataUsers[index] = user;
+  }
+
+  async delete(id: string) {
+    await deleteDoc(doc(this.firestore, "users", id));
+  }
+
   load() {
     const query = collection(this.firestore, 'users');
     onSnapshot(query, (querySnapshot) => {
@@ -26,7 +36,6 @@ export class MyServiceService {
       querySnapshot.forEach((doc) => {
         this.allDataUsers.push({ id: doc.id, ...doc.data() });
       });
-      console.log(this.allDataUsers);
     });
   }
 
@@ -34,11 +43,7 @@ export class MyServiceService {
     const query = collection(this.firestore, 'users');
     const userDoc = doc(query, userId);
     const userSnap = await getDoc(userDoc);
-    if (userSnap.exists()) {
-      return userSnap.data();
-    } else {
-      return null;
-    }
+    return userSnap.data();
   }
 
 }

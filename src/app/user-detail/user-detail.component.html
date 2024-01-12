@@ -3,7 +3,8 @@
         <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #TitleMenu="matMenu">
-        <button mat-menu-item (click)="EditTitleMenu()">Edit</button>
+        <button mat-menu-item (click)="editMenu('user')">Edit</button>
+        <button mat-menu-item (click)="deleteUser(id)">Delete</button>
     </mat-menu>
     <img src="./assets/img/{{user.firstName}}.jpg" onerror="this.src='./assets/img/menschlich.png';">
     <div class="user-details">
@@ -18,7 +19,7 @@
         <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #addressMenu="matMenu">
-        <button mat-menu-item (click)="EditAdressMenu()">Edit</button>
+        <button mat-menu-item (click)="editMenu('address')">Edit</button>
     </mat-menu>
     <mat-card-header>
         <mat-card-title>Address</mat-card-title>
