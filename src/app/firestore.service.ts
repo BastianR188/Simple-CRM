@@ -24,8 +24,10 @@ export class MyServiceService {
     onSnapshot(query, (querySnapshot) => {
       this.allDataUsers = [];
       querySnapshot.forEach((doc) => {
-        this.allDataUsers.push(doc.data());
+        this.allDataUsers.push({ id: doc.id, ...doc.data() });
       });
+      console.log(this.allDataUsers);
     });
+
   }
 }
