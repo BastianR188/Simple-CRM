@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { User } from '../models/user.class';
-import { Firestore, addDoc, collection, onSnapshot } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, doc, getDoc, onSnapshot } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +28,17 @@ export class MyServiceService {
       });
       console.log(this.allDataUsers);
     });
-
   }
+
+  async getUser(userId: string) {
+    const query = collection(this.firestore, 'users');
+    const userDoc = doc(query, userId);
+    const userSnap = await getDoc(userDoc);
+    if (userSnap.exists()) {
+      return userSnap.data();
+    } else {
+      return null;
+    }
+  }
+
 }

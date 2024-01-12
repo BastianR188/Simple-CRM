@@ -24,11 +24,11 @@ export class UserComponent {
   }
 
   getAllUsers() {
-    return this.service.allDataUsers
+    return this.service.allDataUsers;
   }
 
   openDialog() {
-    this.dialog.open(DialogAddUserComponent)
+    this.dialog.open(DialogAddUserComponent);
   }
 
   goToUser(userId: string) {
