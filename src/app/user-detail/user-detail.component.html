@@ -1,5 +1,10 @@
 <mat-card class="user-detail-header">
-
+    <button mat-icon-button [matMenuTriggerFor]="TitleMenu">
+        <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #TitleMenu="matMenu">
+        <button mat-menu-item (click)="EditTitleMenu()">Edit</button>
+    </mat-menu>
     <img src="./assets/img/{{user.firstName}}.jpg" onerror="this.src='./assets/img/menschlich.png';">
     <div class="user-details">
         <h2>{{user.firstName}} {{user.lastName}}</h2><br>
@@ -9,6 +14,12 @@
 </mat-card>
 
 <mat-card class="user-detail-content">
+    <button mat-icon-button [matMenuTriggerFor]="addressMenu">
+        <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #addressMenu="matMenu">
+        <button mat-menu-item (click)="EditAdressMenu()">Edit</button>
+    </mat-menu>
     <mat-card-header>
         <mat-card-title>Address</mat-card-title>
     </mat-card-header>

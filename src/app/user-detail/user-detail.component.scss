@@ -6,12 +6,29 @@
     align-items: flex-end;
     flex-direction: row;
     padding: 24px;
+    position: relative;
+
+    button {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
 
     img {
         height: 100px;
         width: 100px;
         object-fit: cover;
         border-radius: 50%;
+    }
+}
+
+.user-detail-content {
+    position: relative;
+
+    button {
+        position: absolute;
+        right: 0;
+        top: 0;
     }
 }
 
@@ -28,6 +45,6 @@
     }
 }
 
-.user-detail-content{
+.user-detail-content {
     margin-top: 32px;
 }
