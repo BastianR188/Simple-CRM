@@ -13,18 +13,48 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatIconModule, MatButtonModule, MatTooltipModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatIconModule,
+    MatButtonModule,
+    MatTooltipModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   templateUrl: './user.component.html',
-  styleUrl: './user.component.scss'
+  styleUrl: './user.component.scss',
 })
 export class UserComponent {
-
-  constructor(private service: MyServiceService, public dialog: MatDialog, private router: Router) {
+  sortProberty = 'firstName';
+  sortOrder = 'asc';
+  constructor(
+    private service: MyServiceService,
+    public dialog: MatDialog,
+    private router: Router
+  ) {
     this.service.load();
   }
 
+  swapSort() {
+    this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
+  }
+
+  sortBy(proberty: string) {
+    this.sortProberty = proberty;
+  }
+
   getAllUsers() {
+    this.sortByProperty(this.sortProberty, this.sortOrder);
     return this.service.allDataUsers;
+  }
+
+  private sortByProperty(property: string, sortOrder: string) {
+    this.service.allDataUsers.sort((a: any, b: any) => {
+      const comparison =
+        a[property] > b[property] ? 1 : a[property] < b[property] ? -1 : 0;
+      return sortOrder === 'desc' ? comparison * -1 : comparison;
+    });
   }
 
   openDialog() {

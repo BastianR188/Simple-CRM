@@ -1,18 +1,46 @@
 <mat-card class="card">
   <table class="user-table">
     <tr>
-      <th>Name</th>
-      <th>E-Mail</th>
-      <th>City</th>
+      <th (click)="sortBy('firstName')">
+        <div class="table-title">
+          Name
+          <mat-icon (click)="swapSort()"> swap_vert </mat-icon>
+        </div>
+      </th>
+      <th (click)="sortBy('email')">
+        <div class="table-title">
+          E-Mail
+          <mat-icon (click)="swapSort()"> swap_vert </mat-icon>
+        </div>
+      </th>
+      <th (click)="sortBy('city')">
+        <div class="table-title">
+          City
+          <mat-icon (click)="swapSort()"> swap_vert </mat-icon>
+        </div>
+      </th>
+      <th (click)="sortBy('phone')">
+        <div class="table-title">
+          Phone
+          <mat-icon (click)="swapSort()"> swap_vert </mat-icon>
+        </div>
+      </th>
     </tr>
     <tr *ngFor="let user of getAllUsers()" (click)="goToUser(user.id)">
-      <td>{{user.firstName}} {{user.lastName}}</td>
-      <td>{{user.email}}</td>
-      <td>{{user.city}}</td>
+      <td>{{ user.firstName }} {{ user.lastName }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.city }}</td>
+      <td>{{ user.phone }}</td>
     </tr>
   </table>
 </mat-card>
-<button (click)="openDialog()" class="add-user-btn" mat-fab color="primary" matTooltip="Add user"
-  [matTooltipPosition]="'above'">
+<button
+  (click)="openDialog()"
+  class="add-user-btn"
+  mat-fab
+  color="primary"
+  matTooltip="Add user"
+  [matTooltipPosition]="'above'"
+>
   <mat-icon>add</mat-icon>
 </button>
