@@ -1,0 +1,72 @@
+body {
+  background-color: #eff4f7;
+  color: #777;
+  font-family: "Titillium Web", Arial, Helvetica, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong {
+  font-weight: 600;
+}
+
+.box {
+  box-shadow: 0px 1px 22px -12px #607d8b;
+  background-color: #fff;
+  padding: 24px;
+}
+
+.monthly-earnings-text {
+  position: absolute;
+  left: 70px;
+  top: 187px;
+  color: #fff;
+  z-index: 10;
+}
+@media screen and (max-width: 760px) {
+  .monthly-earnings-text {
+    left: 30px;
+  }
+}
+
+.chartboxes,
+.sparkboxes {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.half {
+  width: 50%;
+}
+
+.one-third {
+  width: 33%;
+}
+
+.content-area {
+  max-width: 1070px;
+  margin: 0 auto;
+}
+@media (max-width: 1230px) {
+  .half {
+    width: unset;
+  }
+  .chartboxes {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 1024px) {
+  .one-third {
+    width: unset;
+  }
+  .sparkboxes {
+    flex-direction: column;
+  }
+}

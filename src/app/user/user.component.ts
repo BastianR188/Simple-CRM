@@ -36,12 +36,11 @@ export class UserComponent {
     this.service.load();
   }
 
-  swapSort() {
-    this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
-  }
-
   sortBy(proberty: string) {
-    this.sortProberty = proberty;
+    if (this.sortProberty == proberty) {
+      return (this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc');
+    }
+    return (this.sortProberty = proberty);
   }
 
   getAllUsers() {
