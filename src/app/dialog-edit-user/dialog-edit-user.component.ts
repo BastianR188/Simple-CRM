@@ -23,14 +23,14 @@ export class DialogEditUserComponent {
   user: User = new User();
   userId: string | undefined;
   loading = false;
-
   constructor(private service: MyServiceService, public dialogRef: MatDialogRef<DialogEditUserComponent>) {
+
   }
   saveUser() {
     this.loading = true;
     if (this.userId)
       this.service.update(this.userId, this.user);
     this.loading = false;
-    this.dialogRef.close()
+    this.dialogRef.close(this.user)
   }
 }
