@@ -2,15 +2,12 @@ import { Injectable, inject } from '@angular/core';
 import { User } from '../models/user.class';
 import {
   Firestore,
-  QuerySnapshot,
   addDoc,
   collection,
   deleteDoc,
   doc,
   getDoc,
-  getDocs,
   onSnapshot,
-  orderBy,
   setDoc,
 } from '@angular/fire/firestore';
 
@@ -20,8 +17,8 @@ import {
 export class MyServiceService {
   firestore: Firestore = inject(Firestore);
   allDataUsers: any[] = [];
-  sortOrder: any[] = [];
-  sortDirection: { [key: string]: string } = {};
+  sortOrder: any[] = ['firstName', 'email', 'phone', 'city'];
+  sortDirection: string = 'asc';
 
   constructor() {}
 
@@ -29,18 +26,14 @@ export class MyServiceService {
     return addDoc(collection(this.firestore, 'users'), user.toJSON());
   }
 
-  async saveOder() {
-    const data = this.sortDirection;
-    await setDoc(
-      doc(this.firestore, 'sorting', 'sortDirection'),
-      this.sortDirection
-    );
-
-    let sortOrderObj: { [key: string]: number } = {};
-    this.sortOrder.forEach((key, index) => {
-      sortOrderObj[key] = index;
+  async saveOrder() {
+    await setDoc(doc(this.firestore, 'sorting', 'sortDirection'), {
+      direction: this.sortDirection,
     });
-    await setDoc(doc(this.firestore, 'sorting', 'sortOrder'), sortOrderObj);
+
+    await setDoc(doc(this.firestore, 'sorting', 'sortOrder'), {
+      order: this.sortOrder,
+    });
   }
 
   async update(id: string, user: User) {
@@ -61,7 +54,8 @@ export class MyServiceService {
         this.allDataUsers.push({ id: doc.id, ...doc.data() });
       });
     });
-
+  }
+  loadSortOrder() {
     const unsub = onSnapshot(
       doc(this.firestore, 'sorting', 'sortOrder'),
       (doc) => {
@@ -72,12 +66,13 @@ export class MyServiceService {
         }
       }
     );
-
+  }
+  loadSortDirection() {
     const unsubb = onSnapshot(
       doc(this.firestore, 'sorting', 'sortDirection'),
       (doc) => {
-        this.sortDirection = {};
-        this.sortDirection = doc.data()!;
+        // this.sortDirection = '';
+        // this.sortDirection = doc.data()!;
       }
     );
   }

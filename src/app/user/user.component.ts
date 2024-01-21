@@ -31,37 +31,50 @@ export class UserComponent {
     public dialog: MatDialog,
     private router: Router
   ) {
+    this.service.loadSortOrder();
+    this.service.loadSortDirection();
     this.service.load();
   }
 
-  sortData() {
+  sortByProperty(property: string) {
+    this.sortByDirection(property);
+    this.sortingData(property);
+    this.sortingByOrder(property);
+    this.service.saveOrder();
+  }
+
+  private sortingByOrder(property: string) {
+    let index = this.service.sortOrder.indexOf(property);
+    if (index > -1) {
+      this.service.sortOrder.splice(index, 1);
+      this.service.sortOrder.unshift(property);
+    }
+  }
+
+  private sortingData(property: string) {
     this.service.allDataUsers.sort((a, b) => {
-      return this.service.allDataUsers.reduce((acc, curr) => {
-        if (acc !== 0) return acc;
-        return (
-          (a[curr] < b[curr] ? -1 : a[curr] > b[curr] ? 1 : 0) *
-          (this.service.allDataUsers[curr] === 'desc' ? -1 : 1)
-        );
-      }, 0);
+      const comparison =
+        a[property].toLowerCase() > b[property].toLowerCase()
+          ? 1
+          : a[property].toLowerCase() < b[property].toLowerCase()
+          ? -1
+          : 0;
+      return this.service.sortDirection === 'desc'
+        ? comparison * -1
+        : comparison;
     });
   }
 
-  sortByProperty(property: string) {
+  private sortByDirection(property: string) {
     if (this.service.sortOrder[0] === property) {
-      this.service.sortDirection[property] =
-        this.service.sortDirection[property] === 'asc' ? 'desc' : 'asc';
-    } else {
-      let index = this.service.sortOrder.indexOf(property);
-      if (index > -1) {
-        this.service.sortOrder.splice(index, 1);
-        this.service.sortOrder.unshift(property);
-      }
+      this.service.sortDirection =
+        this.service.sortDirection === 'asc' ? 'desc' : 'asc';
     }
-    console.log(this.service.sortOrder);
-    this.service.saveOder();
-    this.sortData();
   }
 
+  getAllUsers() {
+    return this.service.allDataUsers;
+  }
   getUsers() {
     return this.service.allDataUsers;
   }
