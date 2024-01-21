@@ -1,32 +1,32 @@
 <mat-card class="card">
   <table class="user-table">
     <tr>
-      <th (click)="sortBy('firstName')">
+      <th (click)="sortByProperty('firstName')">
         <div class="table-title">
           Name
           <mat-icon > swap_vert </mat-icon>
         </div>
       </th>
-      <th (click)="sortBy('email')">
+      <th (click)="sortByProperty('email')">
         <div class="table-title">
           E-Mail
           <mat-icon > swap_vert </mat-icon>
         </div>
       </th>
-      <th (click)="sortBy('city')">
+      <th (click)="sortByProperty('city')">
         <div class="table-title">
           City
           <mat-icon > swap_vert </mat-icon>
         </div>
       </th>
-      <th (click)="sortBy('phone')">
+      <th (click)="sortByProperty('phone')">
         <div class="table-title">
           Phone
           <mat-icon > swap_vert </mat-icon>
         </div>
       </th>
     </tr>
-    <tr *ngFor="let user of getAllUsers()" (click)="goToUser(user.id)">
+    <tr *ngFor="let user of getUsers()" (click)="goToUser(user.id)">
       <td>{{ user.firstName }} {{ user.lastName }}</td>
       <td>{{ user.email }}</td>
       <td>{{ user.city }}</td>

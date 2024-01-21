@@ -199,8 +199,8 @@ export class DashboardComponent implements AfterViewInit {
 
   colorPalette = ['#00D8B6', '#008FFB', '#FEB019', '#FF4560', '#775DD0'];
 
-  randomizeArray = function (arg: string | any[]) {
-    let array = arg.slice();
+  randomizeArray(arg: any[]) {
+    const array = arg.slice();
     let currentIndex = array.length,
       temporaryValue,
       randomIndex;
@@ -210,10 +210,12 @@ export class DashboardComponent implements AfterViewInit {
       currentIndex -= 1;
 
       temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
     }
 
     return array;
-  };
+  }
 
   trigoSeries(cnt: number, strength: number) {
     let data = [];
@@ -388,100 +390,37 @@ export class DashboardComponent implements AfterViewInit {
       {
         name: 'Blog',
         data: [
-          {
-            x: 0,
-            y: 0,
-          },
-          {
-            x: 4,
-            y: 5,
-          },
-          {
-            x: 5,
-            y: 3,
-          },
-          {
-            x: 9,
-            y: 8,
-          },
-          {
-            x: 14,
-            y: 4,
-          },
-          {
-            x: 18,
-            y: 5,
-          },
-          {
-            x: 25,
-            y: 0,
-          },
+          { x: 0, y: 0 },
+          { x: 4, y: 5 },
+          { x: 5, y: 3 },
+          { x: 9, y: 8 },
+          { x: 14, y: 4 },
+          { x: 18, y: 5 },
+          { x: 25, y: 0 },
         ],
       },
       {
         name: 'Social Media',
         data: [
-          {
-            x: 0,
-            y: 0,
-          },
-          {
-            x: 4,
-            y: 6,
-          },
-          {
-            x: 5,
-            y: 4,
-          },
-          {
-            x: 14,
-            y: 8,
-          },
-          {
-            x: 18,
-            y: 5.5,
-          },
-          {
-            x: 21,
-            y: 6,
-          },
-          {
-            x: 25,
-            y: 0,
-          },
+          { x: 0, y: 0 },
+          { x: 4, y: 6 },
+          { x: 5, y: 4 },
+          { x: 14, y: 8 },
+          { x: 18, y: 5.5 },
+          { x: 21, y: 6 },
+          { x: 25, y: 0 },
         ],
       },
       {
         name: 'External',
         data: [
-          {
-            x: 0,
-            y: 0,
-          },
-          {
-            x: 2,
-            y: 5,
-          },
-          {
-            x: 5,
-            y: 4,
-          },
-          {
-            x: 10,
-            y: 11,
-          },
-          {
-            x: 14,
-            y: 4,
-          },
-          {
-            x: 18,
-            y: 8,
-          },
-          {
-            x: 25,
-            y: 0,
-          },
+          { x: 0, y: 0 },
+          { x: 2, y: 5 },
+          { x: 5, y: 4 },
+          { x: 10, y: 11 },
+          { x: 14, y: 4 },
+          { x: 18, y: 8 },
+          { x: 25, y: 0 },
         ],
       },
     ],

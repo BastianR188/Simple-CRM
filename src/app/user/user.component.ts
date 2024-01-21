@@ -26,8 +26,6 @@ import { Router } from '@angular/router';
   styleUrl: './user.component.scss',
 })
 export class UserComponent {
-  sortProberty = 'firstName';
-  sortOrder = 'asc';
   constructor(
     private service: MyServiceService,
     public dialog: MatDialog,
@@ -36,24 +34,36 @@ export class UserComponent {
     this.service.load();
   }
 
-  sortBy(proberty: string) {
-    if (this.sortProberty == proberty) {
-      return (this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc');
-    }
-    return (this.sortProberty = proberty);
-  }
-
-  getAllUsers() {
-    this.sortByProperty(this.sortProberty, this.sortOrder);
-    return this.service.allDataUsers;
-  }
-
-  private sortByProperty(property: string, sortOrder: string) {
-    this.service.allDataUsers.sort((a: any, b: any) => {
-      const comparison =
-        a[property] > b[property] ? 1 : a[property] < b[property] ? -1 : 0;
-      return sortOrder === 'desc' ? comparison * -1 : comparison;
+  sortData() {
+    this.service.allDataUsers.sort((a, b) => {
+      return this.service.allDataUsers.reduce((acc, curr) => {
+        if (acc !== 0) return acc;
+        return (
+          (a[curr] < b[curr] ? -1 : a[curr] > b[curr] ? 1 : 0) *
+          (this.service.allDataUsers[curr] === 'desc' ? -1 : 1)
+        );
+      }, 0);
     });
+  }
+
+  sortByProperty(property: string) {
+    if (this.service.sortOrder[0] === property) {
+      this.service.sortDirection[property] =
+        this.service.sortDirection[property] === 'asc' ? 'desc' : 'asc';
+    } else {
+      let index = this.service.sortOrder.indexOf(property);
+      if (index > -1) {
+        this.service.sortOrder.splice(index, 1);
+        this.service.sortOrder.unshift(property);
+      }
+    }
+    console.log(this.service.sortOrder);
+    this.service.saveOder();
+    this.sortData();
+  }
+
+  getUsers() {
+    return this.service.allDataUsers;
   }
 
   openDialog() {
