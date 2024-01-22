@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   NavigationEnd,
@@ -13,6 +13,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { map, shareReplay } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -31,17 +33,31 @@ import { MatNativeDateModule } from '@angular/material/core';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   @ViewChild('drawer') drawer!: MatDrawer;
-
-  constructor(private router: Router) {
-    this.router.events.subscribe((event) => {
-      if (this.router.url === '/') {
-        this.drawer.toggle();
-      }
-    });
+  isSmallScreen = false;
+  constructor(
+    private router: Router,
+    private breakpointObserver: BreakpointObserver
+  ) {
+    // this.router.events.subscribe((event) => {
+    //   if (this.router.url === '/') {
+    //     this.drawer.toggle();
+    //   }
+    // });
   }
-
+  ngOnInit(): void {
+    this.breakpointObserver
+      .observe([Breakpoints.Small, Breakpoints.XSmall])
+      .pipe(
+        map((result: { matches: any }) => result.matches),
+        shareReplay()
+      )
+      .subscribe((matches) => {
+        this.isSmallScreen = matches;
+      });
+  }
+  @HostListener('window:resize', ['$event'])
   isLinkActive(route: string) {
     return this.router.url === route;
   }

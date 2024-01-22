@@ -69,7 +69,7 @@ mat-toolbar-row {
   padding: 16px 56px 0 56px;
 }
 
-.close-nav{
+.close-nav {
   display: none;
 }
 @media (max-width: 480px) {
@@ -108,8 +108,8 @@ mat-toolbar-row {
     flex-direction: column;
   }
   mat-toolbar,
-mat-toolbar-row {
-  min-height: 72px;
-  height: 72px;
-}
+  mat-toolbar-row {
+    min-height: 72px;
+    height: 72px;
+  }
 }
