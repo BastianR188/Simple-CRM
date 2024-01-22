@@ -37,9 +37,13 @@ export class DashboardComponent implements AfterViewInit, OnInit {
       .subscribe((event) => {
         this.removeAllCharts();
       });
+      setTimeout(() => {
+        this.visible = false;
+      }, 3000);
   }
   greeting: string = '';
   charts: ApexCharts[] = [];
+  visible: boolean = true;
   data = {
     prices: [
       7114.25, 7126.6, 7116.95, 7203.7, 7233.75, 7451.0, 7381.15, 7348.95,

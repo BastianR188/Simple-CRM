@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  NavigationEnd,
+  ActivatedRoute,
   Router,
   RouterLink,
   RouterModule,
@@ -38,13 +38,9 @@ export class AppComponent implements OnInit {
   isSmallScreen = false;
   constructor(
     private router: Router,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    private route: ActivatedRoute
   ) {
-    // this.router.events.subscribe((event) => {
-    //   if (this.router.url === '/') {
-    //     this.drawer.toggle();
-    //   }
-    // });
   }
   ngOnInit(): void {
     this.breakpointObserver
@@ -58,14 +54,11 @@ export class AppComponent implements OnInit {
       });
   }
   @HostListener('window:resize', ['$event'])
+
   isLinkActive(route: string) {
-    return this.router.url === route;
+    return this.router.url.startsWith(route);;
   }
-  onResize(event: any) {
-    if (event.target.innerWidth < 780) {
-      this.drawer.close();
-    }
-  }
+
   sidenavToggle() {
     const width = document.documentElement.clientWidth;
     if (width < 780) {
