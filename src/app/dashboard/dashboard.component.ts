@@ -1,5 +1,13 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import ApexCharts from 'apexcharts';
+import { filter } from 'rxjs';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
@@ -7,8 +15,17 @@ import ApexCharts from 'apexcharts';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
-export class DashboardComponent implements AfterViewInit {
+export class DashboardComponent implements AfterViewInit, OnInit {
   @ViewChild('wrapper') wrapper: ElementRef | undefined;
+  constructor(private router: Router) {}
+  ngOnInit() {
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event) => {
+        this.removeAllCharts();
+      });
+  }
+  charts: ApexCharts[] = [];
   data = {
     prices: [
       7114.25, 7126.6, 7116.95, 7203.7, 7233.75, 7451.0, 7381.15, 7348.95,
@@ -546,7 +563,7 @@ export class DashboardComponent implements AfterViewInit {
         donut: {
           size: '75%',
         },
-        offsetY: 20,
+        offsetY: -15,
       },
       stroke: {
         colors: undefined,
@@ -568,8 +585,8 @@ export class DashboardComponent implements AfterViewInit {
       'Gardening',
     ],
     legend: {
-      position: 'left',
-      offsetY: 80,
+      position: 'bottom',
+      offsetY: 0,
     },
   };
 
@@ -658,6 +675,16 @@ export class DashboardComponent implements AfterViewInit {
   }
   renderChart(chart: ApexCharts): void {
     chart.render();
+    this.addChart(chart);
+  }
+  addChart(chart: ApexCharts) {
+    this.charts.push(chart);
+  }
+  removeAllCharts() {
+    this.charts.forEach((chart) => {
+      chart.destroy();
+    });
+    this.charts = []; // Leeren Sie das Array, um die Referenzen auf die zerstörten Charts zu entfernen
   }
   ngAfterViewInit(): void {
     const spark1 = this.initializeChart('#spark1', this.spark1);
@@ -675,6 +702,7 @@ export class DashboardComponent implements AfterViewInit {
     this.renderChart(monthlyEarningsChart);
     this.renderChart(donut);
     chartLine.render().then(() => {
+      this.addChart(chartLine);
       if (this.wrapper) {
         const ifr = this.wrapper.nativeElement;
         if (ifr.contentDocument) {
