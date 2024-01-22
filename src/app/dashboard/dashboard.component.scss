@@ -3,7 +3,7 @@ body {
   color: #777;
   font-family: "Titillium Web", Arial, Helvetica, sans-serif;
 }
-.greeting-page{
+.greeting-page {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -16,7 +16,7 @@ body {
   animation-fill-mode: forwards;
 }
 
-.title{
+.title {
   width: auto;
   margin-left: 50%;
   margin-right: 50%;
@@ -29,7 +29,8 @@ body {
 }
 .welcome,
 .greeting {
-  font-size: xx-large;
+  font-size: 80px;
+  line-height: 80px;
   font-weight: 800;
 }
 h1,
@@ -98,6 +99,12 @@ strong {
   .sparkboxes {
     flex-direction: column;
   }
+  .welcome,
+  .greeting {
+    font-size: 40px;
+    line-height: 40px;
+    font-weight: 800;
+  }
 }
 
 @keyframes greeting {
@@ -108,9 +115,8 @@ strong {
   75% {
     opacity: 1;
   }
-  100%{
+  100% {
     opacity: 0;
     display: none;
   }
-
 }

@@ -1,12 +1,15 @@
 .mat-drawer-container {
   height: 100vh;
   z-index: 100;
-
 }
-
+.menu-title {
+  display: flex;
+  flex-direction: row;
+}
 .menu-icon {
   cursor: pointer;
   margin-right: 24px;
+  min-width: 24px;
 }
 
 .sidenav {
@@ -66,10 +69,9 @@ mat-toolbar-row {
   padding: 16px 56px 0 56px;
 }
 
-.close-nav {
+.close-nav{
   display: none;
 }
-
 @media (max-width: 480px) {
   .router-container {
     padding: 16px;
@@ -97,4 +99,17 @@ mat-toolbar-row {
       border-radius: 50%;
     }
   }
+}
+@media (max-width: 340px) {
+  .title-slash {
+    display: none;
+  }
+  .menu-title {
+    flex-direction: column;
+  }
+  mat-toolbar,
+mat-toolbar-row {
+  min-height: 72px;
+  height: 72px;
+}
 }

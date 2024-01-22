@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
+  NavigationEnd,
   Router,
   RouterLink,
   RouterModule,
@@ -33,7 +34,13 @@ import { MatNativeDateModule } from '@angular/material/core';
 export class AppComponent {
   @ViewChild('drawer') drawer!: MatDrawer;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    this.router.events.subscribe((event) => {
+      if (this.router.url === '/') {
+        this.drawer.toggle();
+      }
+    });
+  }
 
   isLinkActive(route: string) {
     return this.router.url === route;
