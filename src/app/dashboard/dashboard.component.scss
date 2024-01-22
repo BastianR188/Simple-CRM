@@ -3,7 +3,35 @@ body {
   color: #777;
   font-family: "Titillium Web", Arial, Helvetica, sans-serif;
 }
+.greeting-page{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 100vh;
+  transform: translate(-50%, -50%);
+  z-index: 50;
+  background-color: white;
+  animation: greeting 3s;
+  animation-fill-mode: forwards;
+}
 
+.title{
+  width: auto;
+  margin-left: 50%;
+  margin-right: 50%;
+  height: calc(100vh - 100px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+}
+.welcome,
+.greeting {
+  font-size: xx-large;
+  font-weight: 800;
+}
 h1,
 h2,
 h3,
@@ -52,6 +80,7 @@ strong {
 .content-area {
   max-width: 1070px;
   margin: 0 auto;
+  position: relative;
 }
 @media (max-width: 1230px) {
   .half {
@@ -69,4 +98,19 @@ strong {
   .sparkboxes {
     flex-direction: column;
   }
+}
+
+@keyframes greeting {
+  0% {
+    opacity: 1;
+    display: block;
+  }
+  75% {
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+    display: none;
+  }
+
 }

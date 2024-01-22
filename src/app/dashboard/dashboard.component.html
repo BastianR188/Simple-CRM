@@ -1,3 +1,10 @@
+<div class="greeting-page" *ngIf="isLinkActive('/')">
+  <h1 class="title">
+    <span class="welcome">Welcome!</span>
+    <span>and</span>
+    <span class="greeting">{{ greeting }}</span>
+  </h1>
+</div>
 <div class="content-area">
   <div class="sparkboxes">
     <div class="box one-third">

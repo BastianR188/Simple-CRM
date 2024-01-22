@@ -45,13 +45,16 @@
 
         <span
           >Simble CRM /
-          <span [routerLink]="['/dashboard']" *ngIf="isLinkActive('/dashboard')"
+          <span *ngIf="isLinkActive('/')"
+          >Dashboard</span
+        >
+          <span *ngIf="isLinkActive('/dashboard')"
             >Dashboard</span
           >
-          <span [routerLink]="['/user']" *ngIf="isLinkActive('/user')"
+          <span *ngIf="isLinkActive('/user')"
             >Users</span
           >
-          <span [routerLink]="['/imprint']" *ngIf="isLinkActive('/imprint')"
+          <span *ngIf="isLinkActive('/imprint')"
             >Imprint</span
           >
         </span>

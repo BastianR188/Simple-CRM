@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   AfterViewInit,
   Component,
@@ -5,19 +6,31 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import ApexCharts from 'apexcharts';
 import { filter } from 'rxjs';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, RouterModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent implements AfterViewInit, OnInit {
   @ViewChild('wrapper') wrapper: ElementRef | undefined;
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    const time = new Date().getHours();
+    if (time < 12) {
+      this.greeting = 'Good morning';
+    } else if (time < 18) {
+      this.greeting = 'Good afternoon';
+    } else {
+      this.greeting = 'Good evening';
+    }
+  }
+  isLinkActive(route: string) {
+    return this.router.url === route;
+  }
   ngOnInit() {
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
@@ -25,6 +38,7 @@ export class DashboardComponent implements AfterViewInit, OnInit {
         this.removeAllCharts();
       });
   }
+  greeting: string;
   charts: ApexCharts[] = [];
   data = {
     prices: [

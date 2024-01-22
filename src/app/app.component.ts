@@ -1,6 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
+import {
+  Router,
+  RouterLink,
+  RouterModule,
+  RouterOutlet,
+} from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
@@ -36,7 +41,6 @@ export class AppComponent {
   onResize(event: any) {
     if (event.target.innerWidth < 780) {
       this.drawer.close();
-    } else {
     }
   }
   sidenavToggle() {

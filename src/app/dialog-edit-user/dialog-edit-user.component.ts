@@ -15,22 +15,49 @@ import { MyServiceService } from '../firestore.service';
 @Component({
   selector: 'app-dialog-edit-user',
   standalone: true,
-  imports: [CommonModule, MatProgressBarModule, MatButtonModule, MatDialogModule, FormsModule, MatInputModule, MatFormFieldModule, MatDatepickerModule, MatNativeDateModule, MatMomentDateModule],
+  imports: [
+    CommonModule,
+    MatProgressBarModule,
+    MatButtonModule,
+    MatDialogModule,
+    FormsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatMomentDateModule,
+  ],
   templateUrl: './dialog-edit-user.component.html',
-  styleUrl: './dialog-edit-user.component.scss'
+  styleUrl: './dialog-edit-user.component.scss',
 })
 export class DialogEditUserComponent {
   user: User = new User();
   userId: string | undefined;
   loading = false;
-  constructor(private service: MyServiceService, public dialogRef: MatDialogRef<DialogEditUserComponent>) {
+  responsivMobile = true;
 
+  constructor(
+    private service: MyServiceService,
+    public dialogRef: MatDialogRef<DialogEditUserComponent>
+  ) {
+    this.onResizeWindow();
+  }
+  onResizeWindow() {
+    if (window.innerWidth < 650) {
+      this.responsivMobile = false;
+    }
+  }
+  onResizeAddUser(event: any) {
+    if (event.target.innerWidth < 650) {
+      this.responsivMobile = false;
+    } else {
+      this.responsivMobile = true;
+    }
   }
   saveUser() {
     this.loading = true;
-    if (this.userId)
-      this.service.update(this.userId, this.user);
+    if (this.userId) this.service.update(this.userId, this.user);
     this.loading = false;
-    this.dialogRef.close(this.user)
+    this.dialogRef.close(this.user);
   }
 }
