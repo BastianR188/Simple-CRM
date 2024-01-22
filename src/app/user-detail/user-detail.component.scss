@@ -48,3 +48,13 @@
 .user-detail-content {
     margin-top: 32px;
 }
+
+@media (max-width:480px){
+    .user-detail-header{
+        align-items: flex-start;
+        flex-direction: column;
+    }
+    .user-details {
+        margin-left: 0;
+    }
+}

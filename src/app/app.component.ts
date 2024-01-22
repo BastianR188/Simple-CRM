@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -22,12 +22,17 @@ import { MatNativeDateModule } from '@angular/material/core';
 export class AppComponent {
   @ViewChild('drawer') drawer!: MatDrawer;
 
-  constructor() { }
-
+  constructor() {}
   onResize(event: any) {
     if (event.target.innerWidth < 780) {
       this.drawer.close();
     } else {
-      this.drawer.open();
     }
-  }}
+  }
+  sidenavToggle() {
+    const width = document.documentElement.clientWidth;
+    if (width < 780) {
+      this.drawer.close();
+    }
+  }
+}

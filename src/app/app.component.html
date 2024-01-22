@@ -6,9 +6,9 @@
     </div>
 
     <ul class="menu-items">
-      <li routerLink="/dashboard"><mat-icon>fact_check</mat-icon>Dashboard</li>
-      <li routerLink="/user"><mat-icon>perm_identity</mat-icon>User</li>
-      <li routerLink="/imprint"><mat-icon>gpp_maybe</mat-icon>Imprint</li>
+      <li routerLink="/dashboard" (click)="sidenavToggle()"><mat-icon>fact_check</mat-icon>Dashboard</li>
+      <li routerLink="/user" (click)="sidenavToggle()"><mat-icon>perm_identity</mat-icon>User</li>
+      <li routerLink="/imprint" (click)="sidenavToggle()"><mat-icon>gpp_maybe</mat-icon>Imprint</li>
     </ul>
   </mat-drawer>
 

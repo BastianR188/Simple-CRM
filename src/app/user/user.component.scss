@@ -62,3 +62,19 @@
   display: flex;
   align-items: center;
 }
+@media (max-width: 1023px) {
+  .city-responsive {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .phone-responsive {
+    display: none;
+  }
+}
+@media (max-width: 480px) {
+  .email-responsive {
+    display: none;
+  }
+}
