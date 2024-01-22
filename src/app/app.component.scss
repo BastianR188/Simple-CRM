@@ -1,94 +1,98 @@
 .mat-drawer-container {
-    height: 100vh;
+  height: 100vh;
 }
 
 .menu-icon {
-    cursor: pointer;
-    margin-right: 24px;
+  cursor: pointer;
+  margin-right: 24px;
 }
 
 .sidenav {
-    width: 300px;
-
+  width: 300px;
 }
 
 .logo-container {
-    border-bottom: 1px solid rgba($color: #000000, $alpha: 0.04);
-    padding: 0 16px;
-    min-height: 56px;
-    display: flex;
-    align-items: center;
+  border-bottom: 1px solid rgba($color: #000000, $alpha: 0.04);
+  padding: 0 16px;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
 
-    img {
-        height: 40px;
-        margin: auto;
-    }
+  img {
+    height: 40px;
+    margin: auto;
+  }
 }
 
 mat-toolbar,
 mat-toolbar-row {
-    min-height: 56px;
-    height: 56px;
+  min-height: 56px;
+  height: 56px;
 }
 
 .menu-items {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 
-    li {
-        padding: 0 16px;
-        height: 48px;
-        display: flex;
-        align-items: center;
-        cursor: pointer;
+  li {
+    padding: 0 16px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
 
-        mat-icon {
-            margin-right: 16px;
-        }
-
-        &:hover {
-            background-color: rgba($color: #000000, $alpha: 0.04);
-        }
-
-        &:focus {
-            outline: none;
-        }
+    mat-icon {
+      margin-right: 16px;
     }
+
+    &:hover {
+      background-color: rgba($color: #000000, $alpha: 0.04);
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.active {
+  background-color: rgba($color: #000000, $alpha: 0.04);
 }
 
 .router-container {
-    padding: 16px 56px 0 56px;
+  padding: 16px 56px 0 56px;
 }
 
 .close-nav {
-    display: none;
+  display: none;
 }
 
-@media (max-width: 480px){
-    .router-container{
-        padding: 16px;
-    }
+@media (max-width: 480px) {
+  .router-container {
+    padding: 16px;
+  }
 }
 
-
-// die sidenav soll entfernt werden bzw. zur ganzen seite gehen
-@media (max-width: 780px){
-    .sidenav {
-        width: 100%;
+@media (max-width: 780px) {
+  .sidenav {
+    width: 100%;
+  }
+  .menu-items {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    li {
+      width: 100%;
+      justify-content: center;
     }
-    .menu-items {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
+  }
+  .close-nav {
+    display: block;
+    &:hover {
+      cursor: pointer;
+      background-color: rgba($color: #000000, $alpha: 0.04);
+      border-radius: 50%;
     }
-    .close-nav {
-        display: block;
-        &:hover {
-            cursor: pointer;
-            background-color: rgba($color: #000000, $alpha: 0.04);
-            border-radius: 50%;
-        }
-    }
+  }
 }
-

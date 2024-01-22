@@ -1,6 +1,6 @@
-import { Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
@@ -11,18 +11,28 @@ import { MatNativeDateModule } from '@angular/material/core';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, MatToolbarModule, MatSidenavModule, MatIconModule, RouterLink, MatDialogModule],
-  providers: [
-    MatDatepickerModule,
-    MatNativeDateModule
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatIconModule,
+    RouterLink,
+    MatDialogModule,
+    RouterModule,
   ],
+  providers: [MatDatepickerModule, MatNativeDateModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
   @ViewChild('drawer') drawer!: MatDrawer;
 
-  constructor() {}
+  constructor(private router: Router) {}
+
+  isLinkActive(route: string) {
+    return this.router.url === route;
+  }
   onResize(event: any) {
     if (event.target.innerWidth < 780) {
       this.drawer.close();
