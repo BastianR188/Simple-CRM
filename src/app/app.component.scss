@@ -4,6 +4,7 @@
 
 .menu-icon {
     cursor: pointer;
+    margin-right: 24px;
 }
 
 .sidenav {
@@ -60,6 +61,10 @@ mat-toolbar-row {
     padding: 16px 56px 0 56px;
 }
 
+.close-nav {
+    display: none;
+}
+
 @media (max-width: 480px){
     .router-container{
         padding: 16px;
@@ -69,5 +74,20 @@ mat-toolbar-row {
 
 // die sidenav soll entfernt werden bzw. zur ganzen seite gehen
 @media (max-width: 780px){
-
+    .sidenav {
+        width: 100%;
+    }
+    .menu-items {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+    .close-nav {
+        display: block;
+        &:hover {
+            cursor: pointer;
+            background-color: rgba($color: #000000, $alpha: 0.04);
+            border-radius: 50%;
+        }
+    }
 }

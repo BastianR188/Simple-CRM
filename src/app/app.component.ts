@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -20,6 +20,14 @@ import { MatNativeDateModule } from '@angular/material/core';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
+  @ViewChild('drawer') drawer!: MatDrawer;
 
+  constructor() { }
 
-}
+  onResize(event: any) {
+    if (event.target.innerWidth < 780) {
+      this.drawer.close();
+    } else {
+      this.drawer.open();
+    }
+  }}
