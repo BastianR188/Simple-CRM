@@ -1,7 +1,6 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  ActivatedRoute,
   Router,
   RouterLink,
   RouterModule,
@@ -15,6 +14,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { map, shareReplay } from 'rxjs';
+import { LoginComponent } from './login/login.component';
 
 @Component({
   selector: 'app-root',
@@ -28,6 +28,7 @@ import { map, shareReplay } from 'rxjs';
     RouterLink,
     MatDialogModule,
     RouterModule,
+    LoginComponent,
   ],
   providers: [MatDatepickerModule, MatNativeDateModule],
   templateUrl: './app.component.html',
@@ -38,10 +39,8 @@ export class AppComponent implements OnInit {
   isSmallScreen = false;
   constructor(
     private router: Router,
-    private breakpointObserver: BreakpointObserver,
-    private route: ActivatedRoute
-  ) {
-  }
+    private breakpointObserver: BreakpointObserver
+  ) {}
   ngOnInit(): void {
     this.breakpointObserver
       .observe([Breakpoints.Small, Breakpoints.XSmall])
@@ -54,9 +53,8 @@ export class AppComponent implements OnInit {
       });
   }
   @HostListener('window:resize', ['$event'])
-
   isLinkActive(route: string) {
-    return this.router.url.startsWith(route);;
+    return this.router.url.startsWith(route);
   }
 
   sidenavToggle() {

@@ -1,8 +1,5 @@
-<mat-drawer-container
-  class="mat-drawer-container"
-  autosize
->
-  <mat-drawer #drawer class="sidenav"  [opened]="!isSmallScreen" mode="side">
+<mat-drawer-container class="mat-drawer-container" autosize>
+  <mat-drawer #drawer class="sidenav" [opened]="!isSmallScreen" mode="side">
     <div class="logo-container">
       <img src="./assets/logo/SIMPLE - CRM.png" />
       <mat-icon class="close-nav" (click)="drawer.toggle()">close</mat-icon>

@@ -1,0 +1,38 @@
+.mx-16 {
+  margin-right: 16px;
+  margin-left: 16px;
+}
+.my-16 {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  width: 100%;
+}
+mat-card-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.btn-pos,
+mat-card-actions {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  margin-bottom: 16px;
+}
+.login-btn {
+
+  font-size: x-large;
+  padding: 32px;
+
+}
+
+button{
+  &:hover {
+    background-color: #3F51B5;
+    box-shadow: 0 2px 2px 2px rgba($color: #000000, $alpha: 0.2);
+  }
+  transition: all 0.125s;
+  margin: 0 32px;
+}
