@@ -33,12 +33,11 @@
       [attr.aria-label]="'Hide password'"
       [attr.aria-pressed]="hide"
     >
-      <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon></button
-    >
+      <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+    </button>
     @if (passwordFormControl.hasError('wrong')) {
-      <mat-error>The password is wrong</mat-error>
-      }
-    @if (passwordFormControl.hasError('required')) {
+    <mat-error>The password is wrong</mat-error>
+    } @if (passwordFormControl.hasError('required')) {
     <mat-error>The password is <strong>required</strong></mat-error>
     }
   </mat-form-field>

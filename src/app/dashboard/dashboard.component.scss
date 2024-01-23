@@ -3,6 +3,7 @@ body {
   color: #777;
   font-family: "Titillium Web", Arial, Helvetica, sans-serif;
 }
+
 .greeting-page {
   position: absolute;
   top: 50%;
@@ -27,12 +28,14 @@ body {
   text-align: center;
   flex-direction: column;
 }
+
 .welcome,
 .greeting {
   font-size: 80px;
   line-height: 80px;
   font-weight: 800;
 }
+
 h1,
 h2,
 h3,
@@ -56,6 +59,7 @@ strong {
   color: #fff;
   z-index: 10;
 }
+
 @media screen and (max-width: 760px) {
   .monthly-earnings-text {
     left: 30px;
@@ -83,10 +87,12 @@ strong {
   margin: 0 auto;
   position: relative;
 }
+
 @media (max-width: 1230px) {
   .half {
     width: unset;
   }
+
   .chartboxes {
     flex-direction: column;
   }
@@ -96,9 +102,11 @@ strong {
   .one-third {
     width: unset;
   }
+
   .sparkboxes {
     flex-direction: column;
   }
+
   .welcome,
   .greeting {
     font-size: 40px;
@@ -112,9 +120,11 @@ strong {
     opacity: 1;
     display: block;
   }
+
   75% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
     display: none;

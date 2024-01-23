@@ -37,9 +37,9 @@ export class DashboardComponent implements AfterViewInit, OnInit {
       .subscribe((event) => {
         this.removeAllCharts();
       });
-      setTimeout(() => {
-        this.visible = false;
-      }, 3000);
+    setTimeout(() => {
+      this.visible = false;
+    }, 3000);
   }
   greeting: string = '';
   charts: ApexCharts[] = [];
