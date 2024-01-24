@@ -1,53 +1,55 @@
-<mat-card>
-  <mat-card-header>
-    <img class="my-32" src="./assets/logo/SIMPLE - CRM.png" />
-    <mat-card-title>Login</mat-card-title>
-  </mat-card-header>
-  <mat-form-field class="mx-16" appearance="outline">
-    <mat-label>Enter your E-Mail</mat-label>
-    <input
-      type="email"
-      [formControl]="emailFormControl"
-      matInput
-      placeholder="Enter your E-Mail"
-    />
-    @if (emailFormControl.hasError('email') &&
-    !emailFormControl.hasError('required')) {
-    <mat-error>Please enter a valid email address</mat-error>
-    } @if (emailFormControl.hasError('required')) {
-    <mat-error>Email is <strong>required</strong></mat-error>
-    }
-  </mat-form-field>
-  <div class="my-16"></div>
-  <mat-form-field class="mx-16" appearance="outline">
-    <mat-label>Confirm Password</mat-label>
-    <input
-      matInput
-      [formControl]="passwordFormControl"
-      [type]="hide ? 'password' : 'text'"
-      placeholder="Confirm your password..."
-    />
-    <button
-      mat-icon-button
-      matSuffix
-      (click)="hide = !hide"
-      [attr.aria-label]="'Hide password'"
-      [attr.aria-pressed]="hide"
-    >
-      <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
-    </button>
-    @if (passwordFormControl.hasError('wrong')) {
-    <mat-error>The password is wrong</mat-error>
-    } @if (passwordFormControl.hasError('required')) {
-    <mat-error>The password is <strong>required</strong></mat-error>
-    }
-  </mat-form-field>
-  <mat-card-actions>
-    <button mat-button class="login-btn">Login</button>
-  </mat-card-actions>
+<body>
+  <mat-card>
+    <mat-card-header>
+      <img class="my-32" src="./assets/logo/SIMPLE - CRM.png" />
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    <mat-form-field class="mx-16" appearance="outline">
+      <mat-label>Enter your E-Mail</mat-label>
+      <input
+        type="email"
+        [formControl]="emailFormControl"
+        matInput
+        placeholder="Enter your E-Mail"
+      />
+      @if (emailFormControl.hasError('email') &&
+      !emailFormControl.hasError('required')) {
+      <mat-error>Please enter a valid email address</mat-error>
+      } @if (emailFormControl.hasError('required')) {
+      <mat-error>Email is <strong>required</strong></mat-error>
+      }
+    </mat-form-field>
+    <div class="my-16"></div>
+    <mat-form-field class="mx-16" appearance="outline">
+      <mat-label>Confirm Password</mat-label>
+      <input
+        matInput
+        [formControl]="passwordFormControl"
+        [type]="hide ? 'password' : 'text'"
+        placeholder="Confirm your password..."
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+      @if (passwordFormControl.hasError('wrong')) {
+      <mat-error>The password is wrong</mat-error>
+      } @if (passwordFormControl.hasError('required')) {
+      <mat-error>The password is <strong>required</strong></mat-error>
+      }
+    </mat-form-field>
+    <mat-card-actions>
+      <button mat-button class="login-btn buttons">Login</button>
+    </mat-card-actions>
 
-  <div class="btn-pos">
-    <button mat-button>Sign up</button>
-    <button mat-button>Guest Login</button>
-  </div>
-</mat-card>
+    <div class="btn-pos">
+      <button mat-button class="buttons">Sign up</button>
+      <button mat-button class="buttons">Guest Login</button>
+    </div>
+  </mat-card>
+</body>

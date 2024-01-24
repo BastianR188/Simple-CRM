@@ -1,4 +1,4 @@
-<mat-drawer-container class="mat-drawer-container" autosize>
+<mat-drawer-container class="mat-drawer-container" autosize *ngIf="isLoggedIn">
   <mat-drawer #drawer class="sidenav" [opened]="!isSmallScreen" mode="side">
     <div class="logo-container">
       <img src="./assets/logo/SIMPLE - CRM.png" />
@@ -52,3 +52,6 @@
     </div>
   </div>
 </mat-drawer-container>
+<div class="center">
+  <app-login></app-login>
+</div>

@@ -9,6 +9,19 @@
   margin-top: 32px;
   margin-bottom: 32px;
 }
+body{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+mat-card{
+  width: 640px;
+  max-width: 640px;
+  display: flex;
+}
+
 mat-card-header {
   display: flex;
   justify-content: center;
@@ -29,12 +42,15 @@ mat-card-actions {
   padding: 32px;
 
 }
-
 button{
   &:hover {
     background-color: #3F51B5;
     box-shadow: 0 2px 2px 2px rgba($color: #000000, $alpha: 0.2);
   }
   transition: all 0.125s;
+}
+
+.buttons{
+
   margin: 0 32px;
 }

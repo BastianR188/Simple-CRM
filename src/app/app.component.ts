@@ -37,6 +37,7 @@ import { LoginComponent } from './login/login.component';
 export class AppComponent implements OnInit {
   @ViewChild('drawer') drawer!: MatDrawer;
   isSmallScreen = false;
+  isLoggedIn = false;
   constructor(
     private router: Router,
     private breakpointObserver: BreakpointObserver
