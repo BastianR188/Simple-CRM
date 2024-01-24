@@ -1,11 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import ApexCharts from 'apexcharts';
 import { filter } from 'rxjs';
@@ -16,7 +10,7 @@ import { filter } from 'rxjs';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
-export class DashboardComponent implements AfterViewInit, OnInit {
+export class DashboardComponent implements OnInit {
   @ViewChild('wrapper') wrapper: ElementRef | undefined;
   constructor(private router: Router) {
     const time = new Date().getHours();
@@ -37,6 +31,13 @@ export class DashboardComponent implements AfterViewInit, OnInit {
       .subscribe((event) => {
         this.removeAllCharts();
       });
+    if (this.router.url === '/') {
+      setTimeout(() => {
+        this.generateCharts();
+      }, 2000);
+    } else {
+      this.generateCharts();
+    }
     setTimeout(() => {
       this.visible = false;
     }, 3000);
@@ -704,7 +705,8 @@ export class DashboardComponent implements AfterViewInit, OnInit {
     });
     this.charts = []; // Leeren Sie das Array, um die Referenzen auf die zerstörten Charts zu entfernen
   }
-  ngAfterViewInit(): void {
+
+  generateCharts() {
     const spark1 = this.initializeChart('#spark1', this.spark1);
     const spark2 = this.initializeChart('#spark2', this.spark2);
     const spark3 = this.initializeChart('#spark3', this.spark3);

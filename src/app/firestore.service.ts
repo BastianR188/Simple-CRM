@@ -19,7 +19,7 @@ export class MyServiceService {
   allDataUsers: any[] = [];
   sortOrder: any[] = ['firstName', 'email', 'phone', 'city'];
   sortDirection: string = 'asc';
-
+  isLoggedIn = false;
   constructor() {}
 
   save(user: User) {

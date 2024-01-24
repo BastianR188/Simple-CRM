@@ -15,6 +15,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { map, shareReplay } from 'rxjs';
 import { LoginComponent } from './login/login.component';
+import { MyServiceService } from './firestore.service';
 
 @Component({
   selector: 'app-root',
@@ -37,11 +38,14 @@ import { LoginComponent } from './login/login.component';
 export class AppComponent implements OnInit {
   @ViewChild('drawer') drawer!: MatDrawer;
   isSmallScreen = false;
-  isLoggedIn = false;
+  logIn: boolean = false;
   constructor(
     private router: Router,
-    private breakpointObserver: BreakpointObserver
-  ) {}
+    private breakpointObserver: BreakpointObserver,
+    public service: MyServiceService
+  ) {
+    
+  }
   ngOnInit(): void {
     this.breakpointObserver
       .observe([Breakpoints.Small, Breakpoints.XSmall])
@@ -53,6 +57,7 @@ export class AppComponent implements OnInit {
         this.isSmallScreen = matches;
       });
   }
+
   @HostListener('window:resize', ['$event'])
   isLinkActive(route: string) {
     return this.router.url.startsWith(route);
