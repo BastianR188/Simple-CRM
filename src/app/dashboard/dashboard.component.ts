@@ -31,13 +31,7 @@ export class DashboardComponent implements OnInit {
       .subscribe((event) => {
         this.removeAllCharts();
       });
-    if (this.router.url === '/') {
-      setTimeout(() => {
-        this.generateCharts();
-      }, 2000);
-    } else {
-      this.generateCharts();
-    }
+    this.generateChartDelay();
     setTimeout(() => {
       this.visible = false;
     }, 3000);
@@ -234,6 +228,18 @@ export class DashboardComponent implements OnInit {
   ];
 
   colorPalette = ['#00D8B6', '#008FFB', '#FEB019', '#FF4560', '#775DD0'];
+
+  private generateChartDelay() {
+    if (this.router.url === '/') {
+      setTimeout(() => {
+        this.generateCharts();
+      }, 2100);
+    } else {
+      setTimeout(() => {
+        this.generateCharts();
+      }, 1);
+    }
+  }
 
   randomizeArray(arg: any[]) {
     const array = arg.slice();
