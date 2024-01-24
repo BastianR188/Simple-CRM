@@ -44,7 +44,7 @@ export class AppComponent implements OnInit {
     private breakpointObserver: BreakpointObserver,
     public service: MyServiceService
   ) {
-    
+
   }
   ngOnInit(): void {
     this.breakpointObserver
@@ -56,6 +56,9 @@ export class AppComponent implements OnInit {
       .subscribe((matches) => {
         this.isSmallScreen = matches;
       });
+      if (this.router.url === '/') {
+          this.isSmallScreen = true;
+      }
   }
 
   @HostListener('window:resize', ['$event'])
