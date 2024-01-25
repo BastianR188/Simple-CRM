@@ -26,7 +26,7 @@
         </div>
       </th>
     </tr>
-    <tr *ngFor="let user of getAllUsers()" (click)="goToUser(user.id)">
+    <tr *ngFor="let user of this.service.allDataUsers" (click)="goToUser(user.id)">
       <td>{{ user.firstName }} {{ user.lastName }}</td>
       <td class="email-responsive">{{ user.email }}</td>
       <td class="city-responsive">{{ user.city }}</td>

@@ -29,11 +29,19 @@
   }
 }
 
-mat-toolbar,
+.toolbar,
 mat-toolbar-row {
+  display: flex;
+  align-items: center;
   min-height: 56px;
   height: 56px;
+  justify-content: space-between !important; 
 }
+
+.logout{
+  cursor: pointer;
+}
+
 
 .menu-items {
   list-style-type: none;

@@ -30,6 +30,10 @@ export class MyServiceService {
     return addDoc(collection(this.firestore, 'users'), user.toJSON());
   }
 
+  saveAccount(acc: Account) {
+    return addDoc(collection(this.firestore, 'accounts'), acc.toJSON());
+  }
+
   async saveOrder() {
     await setDoc(doc(this.firestore, 'sorting', 'sortDirection'), {
       direction: this.sortDirection,
@@ -94,10 +98,11 @@ export class MyServiceService {
     );
     const querySnapshot = await getDocs(q);
     const user = querySnapshot.docs.find((doc) => doc.data()['pw'] === pw);
+    let data = new Account(user?.data());
     if (user) {
-      return true;
+      return data.name;
     } else {
-      return false;
+      return null;
     }
   };
 }

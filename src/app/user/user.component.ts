@@ -27,7 +27,7 @@ import { Router } from '@angular/router';
 })
 export class UserComponent implements AfterViewInit {
   constructor(
-    private service: MyServiceService,
+    public service: MyServiceService,
     public dialog: MatDialog,
     private router: Router
   ) {

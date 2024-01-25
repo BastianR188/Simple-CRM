@@ -13,6 +13,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MyServiceService } from '../firestore.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Account } from '../../models/account.class';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -25,6 +27,7 @@ import { CommonModule } from '@angular/common';
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
+    MatProgressBarModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -34,11 +37,20 @@ export class LoginComponent {
     Validators.required,
     Validators.email,
   ]);
+  email = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
   passwordFormControl = new FormControl('', [Validators.required]);
-  hide = true;
+  name = new FormControl('', [Validators.required]);
+  password = new FormControl('', [Validators.required]);
 
+  hide = true;
+  signUp = false;
+  account = new Account
+  signUpLoading = false;
   constructor(public service: MyServiceService, public router: Router) {}
-  login() {
+  login(name: string) {
     this.service.isLoggedIn = true;
     this.isLinkActive('/');
   }
@@ -50,13 +62,20 @@ export class LoginComponent {
     this.validLogin(userExists);
   };
 
-  validLogin(check: boolean) {
+  validLogin(check: any) {
     if (check) {
-      return this.login();
+      this.login(check);
     }
-    console.log('passwordWrong');
   }
   loginGuest() {
-    this.login();
+    this.login('Guest');
+  }
+  signIn() {
+    this.signUpLoading = true;
+    // this.service.saveAccount(this.account)
+    console.log('name = '+ this.account.name, 'email = ' + this.account.email, 'password = ' + this.account.pw);
+    this.account = new Account;
+    this.signUpLoading = false;
+    this.signUp = false;
   }
 }
