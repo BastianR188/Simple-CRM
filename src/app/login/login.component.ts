@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MyServiceService } from '../firestore.service';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -23,6 +24,7 @@ import { Router } from '@angular/router';
     MatIconModule,
     FormsModule,
     ReactiveFormsModule,
+    CommonModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -34,6 +36,7 @@ export class LoginComponent {
   ]);
   passwordFormControl = new FormControl('', [Validators.required]);
   hide = true;
+
   constructor(public service: MyServiceService, public router: Router) {}
   login() {
     this.service.isLoggedIn = true;
@@ -41,5 +44,19 @@ export class LoginComponent {
   }
   isLinkActive(route: string) {
     return this.router.navigate([route]);
+  }
+  checkUser = async (email: string, pw: string) => {
+    const userExists = await this.service.checkUserExist(email, pw);
+    this.validLogin(userExists);
+  };
+
+  validLogin(check: boolean) {
+    if (check) {
+      return this.login();
+    }
+    console.log('passwordWrong');
+  }
+  loginGuest() {
+    this.login();
   }
 }

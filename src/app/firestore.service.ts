@@ -7,9 +7,13 @@ import {
   deleteDoc,
   doc,
   getDoc,
+  getDocs,
   onSnapshot,
+  query,
   setDoc,
+  where,
 } from '@angular/fire/firestore';
+import { Account } from '../models/account.class';
 
 @Injectable({
   providedIn: 'root',
@@ -82,4 +86,18 @@ export class MyServiceService {
     const userSnap = await getDoc(userDoc);
     return userSnap.data();
   }
+
+  checkUserExist = async (email: string, pw: string) => {
+    const q = query(
+      collection(this.firestore, 'accounts'),
+      where('email', '==', email)
+    );
+    const querySnapshot = await getDocs(q);
+    const user = querySnapshot.docs.find((doc) => doc.data()['pw'] === pw);
+    if (user) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 }

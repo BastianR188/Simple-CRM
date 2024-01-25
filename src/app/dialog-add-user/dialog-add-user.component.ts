@@ -39,10 +39,10 @@ export class DialogAddUserComponent {
     private service: MyServiceService,
     public dialogRef: MatDialogRef<DialogAddUserComponent>
   ) {
-this.onResizeWindow();
+    this.onResizeWindow();
   }
-  onResizeWindow(){
-    if (window.innerWidth < 650){
+  onResizeWindow() {
+    if (window.innerWidth < 650) {
       this.responsivMobile = false;
     }
   }
