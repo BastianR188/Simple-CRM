@@ -71,8 +71,7 @@ export class MyServiceService {
     const unsubb = onSnapshot(
       doc(this.firestore, 'sorting', 'sortDirection'),
       (doc) => {
-        // this.sortDirection = '';
-        // this.sortDirection = doc.data()!;
+        this.sortDirection = JSON.stringify(doc.data());
       }
     );
   }

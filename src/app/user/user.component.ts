@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -25,7 +25,7 @@ import { Router } from '@angular/router';
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss',
 })
-export class UserComponent {
+export class UserComponent implements AfterViewInit {
   constructor(
     private service: MyServiceService,
     public dialog: MatDialog,
@@ -36,21 +36,24 @@ export class UserComponent {
     this.service.load();
   }
 
+  ngAfterViewInit(): void {
+    this.sortingData(this.service.sortOrder[0]);
+  }
+
   sortByProperty(property: string) {
     this.sortByDirection(property);
-    this.sortingData(property);
     this.sortingByOrder(property);
+    this.sortingData(property);
     this.service.saveOrder();
   }
 
   private sortingByOrder(property: string) {
-    let index = this.service.sortOrder.indexOf(property);
-    if (index > -1) {
+    if (this.service.sortOrder[0] != property) {
+      let index = this.service.sortOrder.indexOf(property);
       this.service.sortOrder.splice(index, 1);
       this.service.sortOrder.unshift(property);
     }
   }
-
   private sortingData(property: string) {
     this.service.allDataUsers.sort((a, b) => {
       const comparison =
@@ -59,16 +62,18 @@ export class UserComponent {
           : a[property].toLowerCase() < b[property].toLowerCase()
           ? -1
           : 0;
-      return this.service.sortDirection === 'desc'
-        ? comparison * -1
-        : comparison;
+
+      return this.service.sortDirection.includes('asc')
+        ? comparison
+        : -comparison;
     });
   }
 
   private sortByDirection(property: string) {
     if (this.service.sortOrder[0] === property) {
-      this.service.sortDirection =
-        this.service.sortDirection === 'asc' ? 'desc' : 'asc';
+      this.service.sortDirection = this.service.sortDirection.includes('asc')
+        ? 'desc'
+        : 'asc';
     }
   }
 
