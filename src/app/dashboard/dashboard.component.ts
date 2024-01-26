@@ -4,6 +4,7 @@ import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import ApexCharts from 'apexcharts';
 import { filter } from 'rxjs';
 import { AppComponent } from '../app.component';
+import { MyServiceService } from '../firestore.service';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
@@ -14,7 +15,7 @@ import { AppComponent } from '../app.component';
 })
 export class DashboardComponent implements OnInit {
   @ViewChild('wrapper') wrapper: ElementRef | undefined;
-  constructor(private router: Router) {
+  constructor(private router: Router, public service: MyServiceService) {
     const time = new Date().getHours();
     if (time < 12) {
       this.greeting = 'Good morning';

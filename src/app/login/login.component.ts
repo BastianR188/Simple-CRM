@@ -89,15 +89,15 @@ export class LoginComponent {
 
     if (this.account.name.length < 1) {
       this.signUpLoading = false;
-      return console.log('false name');
+      return;
     }
     if (!this.validateEmail(this.account.email)) {
       this.signUpLoading = false;
-      return console.log('false email');
+      return;
     }
     if (this.account.pw.length < 1) {
       this.signUpLoading = false;
-      return console.log('false pw');
+      return;
     }
 
     this.service.saveAccount(this.account);

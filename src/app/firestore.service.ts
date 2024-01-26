@@ -45,7 +45,7 @@ export class MyServiceService {
   }
 
   async update(id: string, user: User) {
-    await setDoc(doc(collection(this.firestore, 'users'), id), user.toJSON());
+    await setDoc(doc(this.getQueryRef('users'), id), user.toJSON());
     const index = this.allDataUsers.findIndex((obj) => obj.id === id);
     if (index !== -1) this.allDataUsers[index] = user;
   }
@@ -55,14 +55,14 @@ export class MyServiceService {
   }
 
   load() {
-    const query = collection(this.firestore, 'users');
-    onSnapshot(query, (querySnapshot) => {
+    onSnapshot(this.getQueryRef('users'), (querySnapshot) => {
       this.allDataUsers = [];
       querySnapshot.forEach((doc) => {
         this.allDataUsers.push({ id: doc.id, ...doc.data() });
       });
     });
   }
+
   loadSortOrder() {
     const unsub = onSnapshot(
       doc(this.firestore, 'sorting', 'sortOrder'),
@@ -75,6 +75,7 @@ export class MyServiceService {
       }
     );
   }
+
   loadSortDirection() {
     const unsubb = onSnapshot(
       doc(this.firestore, 'sorting', 'sortDirection'),
@@ -84,22 +85,18 @@ export class MyServiceService {
     );
   }
 
-  getQueryRef() {
-    
+  getQueryRef(ref: string) {
+    return collection(this.firestore, ref);
   }
 
   async getUser(userId: string) {
-    const query = collection(this.firestore, 'users');
-    const userDoc = doc(query, userId);
+    const userDoc = doc(this.getQueryRef('users'), userId);
     const userSnap = await getDoc(userDoc);
     return userSnap.data();
   }
 
   checkUserExist = async (email: string, pw: string) => {
-    const q = query(
-      collection(this.firestore, 'accounts'),
-      where('email', '==', email)
-    );
+    const q = query(this.getQueryRef('accounts'), where('email', '==', email));
     const querySnapshot = await getDocs(q);
     const user = querySnapshot.docs.find((doc) => doc.data()['pw'] === pw);
     let data = new Account(user?.data());
