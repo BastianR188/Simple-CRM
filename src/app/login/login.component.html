@@ -1,5 +1,9 @@
 <body>
   <mat-card *ngIf="!signUp">
+    <mat-progress-bar
+    *ngIf="signUpLoading"
+    mode="indeterminate"
+  ></mat-progress-bar>
     <mat-card-header>
       <img class="my-32" src="./assets/logo/SIMPLE - CRM.png" />
       <mat-card-title>Login</mat-card-title>
@@ -57,6 +61,7 @@
       <button
         mat-button
         class="login-btn buttons"
+        [disabled]="this.emailInput.value == ''|| this.passwordInput.value == ''"
         (click)="checkUser(emailInput.value, passwordInput.value)"
       >
         Login
@@ -64,7 +69,7 @@
     </mat-card-actions>
 
     <div class="btn-pos">
-      <button mat-button class="buttons" (click)="signUp = true">
+      <button mat-button class="buttons" (click)="signUp = true; signUpLoading = false;">
         Sign up
       </button>
       <button mat-button class="buttons" (click)="loginGuest()">
@@ -78,13 +83,13 @@
       *ngIf="signUpLoading"
       mode="indeterminate"
     ></mat-progress-bar>
-    <mat-icon class="mat-18 back" (click)="signUp = false">arrow_back</mat-icon>
+    <mat-icon class="mat-18 back" (click)="signUp = false; signUpLoading = false;">arrow_back</mat-icon>
     <mat-card-header>
       <img class="my-32" src="./assets/logo/SIMPLE - CRM.png" />
       <mat-card-title>Sign up</mat-card-title>
     </mat-card-header>
     <mat-form-field class="mx-16" appearance="outline">
-      <mat-label>Name</mat-label>
+      <mat-label>Enter your Name</mat-label>
       <input
         matInput
         [disabled]="signUpLoading"
@@ -92,31 +97,31 @@
         type="text"
         required
         replaceholder="Enter your Name"
-      /> @if (name.hasError('required')) {
-        <mat-error>Name is <strong>required</strong></mat-error>
-        }
+      />
+      @if (nameInput.hasError('required')) {
+      <mat-error>Name is <strong>required</strong></mat-error>
+      }
     </mat-form-field>
-
+    <div class="my-16"></div>
     <mat-form-field class="mx-16" appearance="outline">
-      <mat-label>Email</mat-label>
+      <mat-label>Enter your E-Mail</mat-label>
       <input
         matInput
         [disabled]="signUpLoading"
         [(ngModel)]="account.email"
-        [formControl]="email"
         type="email"
         required
+        [formControl]="emailInput"
         placeholder="Enter your E-Mail"
-      />@if (email.hasError('email') &&
-      !email.hasError('required')) {
+      />@if (emailInput.hasError('email') && !emailInput.hasError('required')) {
       <mat-error>Please enter a valid email address</mat-error>
-      } @if (email.hasError('required')) {
+      } @if (emailInput.hasError('required')) {
       <mat-error>Email is <strong>required</strong></mat-error>
       }
     </mat-form-field>
-
+    <div class="my-16"></div>
     <mat-form-field class="mx-16" appearance="outline">
-      <mat-label>Password</mat-label>
+      <mat-label>Enter your Password</mat-label>
       <input
         matInput
         [disabled]="signUpLoading"
@@ -125,9 +130,10 @@
         required
         placeholder="Enter your Password"
         [type]="hide ? 'password' : 'text'"
-      />    @if (password.hasError('required')) {
-        <mat-error>Password is <strong>required</strong></mat-error>
-        }
+      />
+      @if (passwordInput.hasError('required')) {
+      <mat-error>Password is <strong>required</strong></mat-error>
+      }
 
       <button
         mat-icon-button
@@ -141,7 +147,16 @@
     </mat-form-field>
 
     <mat-card-actions>
-      <button mat-button [disabled]="signUpLoading" (click)="signIn()">
+      <button
+        mat-button
+        [disabled]="
+          signUpLoading ||
+          this.account.name == '' ||
+          this.account.email == '' ||
+          this.account.pw == ''
+        "
+        (click)="signIn()"
+      >
         Sign Up
       </button>
     </mat-card-actions>

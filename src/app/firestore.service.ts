@@ -23,7 +23,7 @@ export class MyServiceService {
   allDataUsers: any[] = [];
   sortOrder: any[] = ['firstName', 'email', 'phone', 'city'];
   sortDirection: string = 'asc';
-  isLoggedIn = false;
+  isLoggedIn = '';
   constructor() {}
 
   save(user: User) {
@@ -82,6 +82,10 @@ export class MyServiceService {
         this.sortDirection = JSON.stringify(doc.data());
       }
     );
+  }
+
+  getQueryRef() {
+    
   }
 
   async getUser(userId: string) {

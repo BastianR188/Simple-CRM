@@ -37,27 +37,39 @@ export class LoginComponent {
     Validators.required,
     Validators.email,
   ]);
-  email = new FormControl('', [
-    Validators.required,
-    Validators.email,
-  ]);
+
   passwordFormControl = new FormControl('', [Validators.required]);
-  name = new FormControl('', [Validators.required]);
-  password = new FormControl('', [Validators.required]);
+  nameInput = new FormControl('', [Validators.required]);
+  emailInput = new FormControl('', [Validators.required, Validators.email]);
+  passwordInput = new FormControl('', [Validators.required]);
 
   hide = true;
   signUp = false;
-  account = new Account
+  account = new Account();
   signUpLoading = false;
-  constructor(public service: MyServiceService, public router: Router) {}
+
+  constructor(public service: MyServiceService, public router: Router) {
+    this.emailFormControl = new FormControl(
+      { value: '', disabled: this.signUpLoading },
+      Validators.email
+    );
+    this.passwordFormControl = new FormControl(
+      { value: '', disabled: this.signUpLoading },
+      Validators.email
+    );
+  }
+
   login(name: string) {
-    this.service.isLoggedIn = true;
+    this.service.isLoggedIn = name;
     this.isLinkActive('/');
   }
+
   isLinkActive(route: string) {
     return this.router.navigate([route]);
   }
+
   checkUser = async (email: string, pw: string) => {
+    this.signUpLoading = true;
     const userExists = await this.service.checkUserExist(email, pw);
     this.validLogin(userExists);
   };
@@ -67,15 +79,36 @@ export class LoginComponent {
       this.login(check);
     }
   }
+
   loginGuest() {
     this.login('Guest');
   }
+
   signIn() {
     this.signUpLoading = true;
-    // this.service.saveAccount(this.account)
-    console.log('name = '+ this.account.name, 'email = ' + this.account.email, 'password = ' + this.account.pw);
-    this.account = new Account;
+
+    if (this.account.name.length < 1) {
+      this.signUpLoading = false;
+      return console.log('false name');
+    }
+    if (!this.validateEmail(this.account.email)) {
+      this.signUpLoading = false;
+      return console.log('false email');
+    }
+    if (this.account.pw.length < 1) {
+      this.signUpLoading = false;
+      return console.log('false pw');
+    }
+
+    this.service.saveAccount(this.account);
+
+    this.account = new Account();
     this.signUpLoading = false;
     this.signUp = false;
+  }
+
+  validateEmail(email: string) {
+    var re = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/;
+    return re.test(email);
   }
 }

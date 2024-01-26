@@ -3,12 +3,14 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import ApexCharts from 'apexcharts';
 import { filter } from 'rxjs';
+import { AppComponent } from '../app.component';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
+  providers: [AppComponent]
 })
 export class DashboardComponent implements OnInit {
   @ViewChild('wrapper') wrapper: ElementRef | undefined;
@@ -705,7 +707,7 @@ export class DashboardComponent implements OnInit {
   addChart(chart: ApexCharts) {
     this.charts.push(chart);
   }
-  removeAllCharts() {
+  public removeAllCharts() {
     this.charts.forEach((chart) => {
       chart.destroy();
     });

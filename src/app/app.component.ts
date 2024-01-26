@@ -39,13 +39,13 @@ export class AppComponent implements OnInit {
   @ViewChild('drawer') drawer!: MatDrawer;
   isSmallScreen = false;
   logIn: boolean = false;
+
   constructor(
     private router: Router,
     private breakpointObserver: BreakpointObserver,
     public service: MyServiceService
-  ) {
+  ) {}
 
-  }
   ngOnInit(): void {
     this.breakpointObserver
       .observe([Breakpoints.Small, Breakpoints.XSmall])
@@ -56,9 +56,9 @@ export class AppComponent implements OnInit {
       .subscribe((matches) => {
         this.isSmallScreen = matches;
       });
-      if (this.router.url === '/') {
-          this.isSmallScreen = true;
-      }
+    if (this.router.url === '/') {
+      this.isSmallScreen = true;
+    }
   }
 
   @HostListener('window:resize', ['$event'])
@@ -71,5 +71,10 @@ export class AppComponent implements OnInit {
     if (width < 780) {
       this.drawer.close();
     }
+  }
+
+  logout() {
+    this.isLinkActive('/');
+    this.service.isLoggedIn = '';
   }
 }
