@@ -78,6 +78,10 @@ export class LoginComponent {
     if (check) {
       this.login(check);
     }
+    this.emailFormControl.setErrors({ notFound: true });
+    this.passwordFormControl.setErrors({ wrong: true });
+
+    this.signUpLoading = false;
   }
 
   loginGuest() {
